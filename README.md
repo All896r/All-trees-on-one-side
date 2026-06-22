@@ -1,1 +1,11 @@
 # All-trees-on-one-side
+
+# Willkommen bei den Bäumen des Jahres
+
+🇩🇪 Deutsch
+
+Wähle einen Baum aus der Liste aus, um mehr über ihn zu erfahren. Zu jedem Baum findest du Bilder, Informationen über seine Eigenschaften, seinen Lebensraum und seine Bedeutung für die Natur.
+
+🇬🇧 English
+
+Select a tree from the list to learn more about it. For each tree you will find pictures, information about its characteristics, habitat, and importance for nature.
