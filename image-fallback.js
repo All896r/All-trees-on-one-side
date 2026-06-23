@@ -1,33 +1,36 @@
 (function () {
-  function fallbackSvg(label) {
-    var safeLabel = (label || 'Baum des Jahres')
-      .replace(/^Foto von\s+/i, '')
-      .replace(/[&<>'"]/g, function (char) {
-        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char];
-      });
+  var genericPhotoFallbacks = [
+    'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=80'
+  ];
 
-    return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Ersatzbild für ' + safeLabel + '">' +
-        '<defs>' +
-          '<linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#d8ead0"/><stop offset="1" stop-color="#f6f1df"/></linearGradient>' +
-          '<linearGradient id="leaf" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2f8f5b"/><stop offset="1" stop-color="#123b2b"/></linearGradient>' +
-        '</defs>' +
-        '<rect width="1200" height="800" fill="url(#sky)"/>' +
-        '<circle cx="210" cy="155" r="90" fill="#f2c94c" opacity=".85"/>' +
-        '<path d="M0 610 C170 540 310 610 470 565 C650 515 790 595 960 545 C1070 512 1145 535 1200 515 L1200 800 L0 800 Z" fill="#cfe3c5"/>' +
-        '<path d="M530 630 L600 310 L670 630 Z" fill="#8a5b34"/>' +
-        '<circle cx="600" cy="275" r="185" fill="url(#leaf)"/>' +
-        '<circle cx="455" cy="370" r="130" fill="#2f8f5b"/>' +
-        '<circle cx="745" cy="370" r="130" fill="#1f6f4a"/>' +
-        '<text x="600" y="720" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800" fill="#123b2b">' + safeLabel + '</text>' +
-      '</svg>'
-    );
+  function treeNameFromAlt(altText) {
+    return (altText || 'Baum')
+      .replace(/^Foto von\s+/i, '')
+      .trim();
+  }
+
+  function photoFallbacksFor(image) {
+    var treeName = encodeURIComponent(treeNameFromAlt(image.alt));
+    var searchPhoto = 'https://loremflickr.com/1200/800/' + treeName + ',tree,forest';
+
+    return [searchPhoto].concat(genericPhotoFallbacks);
   }
 
   document.addEventListener('error', function (event) {
     var image = event.target;
-    if (!image || image.tagName !== 'IMG' || image.dataset.fallbackApplied) return;
-    image.dataset.fallbackApplied = 'true';
-    image.src = fallbackSvg(image.alt);
+    if (!image || image.tagName !== 'IMG') return;
+
+    var fallbacks = image.dataset.photoFallbacks
+      ? image.dataset.photoFallbacks.split('|')
+      : photoFallbacksFor(image);
+    var fallbackIndex = Number(image.dataset.fallbackIndex || 0);
+
+    if (fallbackIndex >= fallbacks.length) return;
+
+    image.dataset.photoFallbacks = fallbacks.join('|');
+    image.dataset.fallbackIndex = String(fallbackIndex + 1);
+    image.src = fallbacks[fallbackIndex];
   }, true);
 }());
