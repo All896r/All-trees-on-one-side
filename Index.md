@@ -9,3 +9,4 @@ Wähle einen Baum aus der Liste aus, um mehr über ihn zu erfahren. Zu jedem Bau
 🇬🇧 English
 
 Select a tree from the list to learn more about it. For each tree you will find pictures, information about its characteristics, habitat, and importance for nature.
+[Testbaum1.md] (Testbaum1.md)
