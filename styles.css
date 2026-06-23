@@ -25,6 +25,11 @@ main { width: min(1180px, calc(100% - 32px)); margin: 52px auto; }
 .intro { background: var(--card); border: 1px solid rgba(31,111,74,.16); border-radius: 28px; padding: clamp(24px, 5vw, 48px); box-shadow: var(--shadow); }
 .intro h2, .text-panel h2 { margin-top: 0; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -.04em; }
 .intro p, .text-panel p { font-size: 1.08rem; line-height: 1.8; }
+.project-credit { margin: 28px 0; padding: clamp(24px, 5vw, 42px); text-align: center; border-radius: 28px; background: rgba(255,255,255,.72); border: 1px solid rgba(31,111,74,.14); box-shadow: 0 14px 34px rgba(18,59,43,.10); }
+.project-credit p { margin: 0; }
+.project-credit__main { font-size: clamp(2rem, 5vw, 4.3rem); line-height: 1; font-weight: 800; letter-spacing: -.06em; color: var(--leaf-dark); }
+.project-credit__tiny { margin-top: 8px !important; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(18,59,43,.52); }
+.project-credit__site { margin-top: 16px !important; font-size: clamp(.95rem, 1.8vw, 1.15rem); font-weight: 700; color: var(--leaf); }
 .tree-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
 .tree-card { min-height: 170px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; padding: 22px; border-radius: 24px; text-decoration: none; background: linear-gradient(145deg, white, #edf7e8); border: 1px solid rgba(31,111,74,.14); box-shadow: 0 14px 34px rgba(18,59,43,.10); transition: transform .2s ease, box-shadow .2s ease; }
 .tree-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
